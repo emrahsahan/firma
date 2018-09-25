@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="alert alert-danger" role="alert">
+                    İletişim Bilgileri
+                </div>
+                <table class="table">
+               <tr>
+                    <td>
+                        Firma Sahibi
+                    </td>
+                   <td>
+                       {{ firma.sahibi }}
+                   </td>
+               </tr>
+                <tr>
+                    <td>
+                        İş Telefonu
+                    </td>
+                   <td>
+                       {{ firma.telefon}}
+                   </td>
+               </tr>
+                <tr>
+                    <td>
+                        Cep Telefonu
+                    </td>
+                   <td>
+                       {{ firma.telefon2 }}
+                   </td>
+               </tr>
+                <tr>
+                    <td>
+                        Faks
+                    </td>
+                   <td>
+                       {{ firma.faks }}
+                   </td>
+               </tr>
+                <tr>
+                    <td>
+                        E-mail
+                    </td>
+                   <td>
+                       {{ firma.email}}
+                   </td>
+               </tr>
+                               <tr>
+                    <td>
+                        Adres
+                    </td>
+                   <td>
+                       {{ firma.adres }}
+                   </td>
+               </tr>
+                <tr>
+                    <td>
+                        Facebook
+                    </td>
+                   <td>
+                       {{ firma.facebook }}
+                   </td>
+               </tr>
+                <tr>
+                    <td>
+                        Twitter
+                    </td>
+                   <td>
+                       {{ firma.twitter }}
+                   </td>
+               </tr>
+                <tr>
+                    <td>
+                        Youtube
+                    </td>
+                   <td>
+                       {{ firma.youtube }}
+                   </td>
+               </tr>
+                <tr>
+                    <td>
+                        Instagram
+                    </td>
+                   <td>
+                       {{ firma.instagram }}
+                   </td>
+               </tr>
+                    <tr>
+                        <td>Google Map</td>
+                        <td>{{ firma.googlemap|safe }}</td>
+                    </tr>
+            </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

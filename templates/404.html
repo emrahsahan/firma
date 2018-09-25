@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+         <div class="col-md-8 offset-md-2 text-center" style="height:400px;">
+                <br><br><br>
+                <h3>Böyle bir sayfa bulunmamaktadır!!!</h3>
+                <h3>Lütfen ana sayfaya dönünüz.</h3>
+                <img src="{% static 'images/404.jpg' %}"/>
+         </div>
+        </div>
+    </div>
+{% endblock %}

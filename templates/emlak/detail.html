@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row row-margin">
+
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                <h5 class="card-header"><span class="float-left">{{ emlak.il }} / {{ emlak.ilce }} / {{ emlak.mahalle }} Mah.</span><span class="float-right">İlan No:{{ emlak.ilanno }}</span></h5>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td>Emlak Durumu:</td>
+                                <td>
+                                    {% if emlak.durum == '1' %}
+                                        Satılık
+                                    {% endif %}
+                                    {% if emlak.durum == '2' %}
+                                        Kiralık
+                                    {% endif %}
+                                </td>
+                                <td>Emlak Tipi:</td>
+                                <td>{{ emlak.tip}}</td>
+                            </tr>
+                            <tr>
+                                <td>İlan Tarihi:</td>
+                                <td>{{ emlak.tarih }}</td>
+                                <td>Fiyatı:</td>
+                                <td>{{ emlak.fiyat }}</td>
+                            </tr>
+                            <tr>
+                                <td>Oda Sayısı:</td>
+                                <td>{{ emlak.oda }}</td>
+                                <td>Bulunduğu Kat:</td>
+                                <td>{{ emlak.kat }}</td>
+                            </tr>
+                            <tr>
+                                <td>Büyüklük:</td>
+                                <td>{{ emlak.buyukluk }} m<sup>2</sup></td>
+                                <td>Isınma Tipi:</td>
+                                <td>{{ emlak.isinmatipi }}</td>
+                            </tr>
+                        </table>
+                        {% if emlak.resim %}
+                        <img src="{{ emlak.resim.url }}" class="img-fluid"/>
+                        {% endif %}
+                    <p class="card-text">{{ emlak.aciklama|safe|linebreaks }}</p>
+                     <p>{% for resim in emlak.resimler.all %}
+                    <a class="example-image-link" href="{{ resim.resim.url }}" data-lightbox="example-set" data-title="Emlak Fotoğrafları.">
+                    <img class="example-image img-thumbnail"  width="32.5%" src="{{ resim.resim.url }}" alt=""/></a>
+                {% endfor %}
+                     </p>
+                        {% if emlak.durum == '1' %}
+                        <a href="{% url 'emlak:satilik' %}" class="btn btn-primary">Geri Dön</a>
+                        {% endif %}
+                        {% if emlak.durum == '2' %}
+                        <a href="{% url 'emlak:kiralik' %}" class="btn btn-primary">Geri Dön</a>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <a href="{{ emlak.get_update_url }}" class="btn btn-success" style="margin-right:5px">Güncelle</a>
+                        <a href="{{ emlak.get_delete_url }}" class="btn btn-warning">Sil</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

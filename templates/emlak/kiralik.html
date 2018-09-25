@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="container">
+            <div class="row row-margin">
+    {% for emlak in emlaks %}
+
+            <div class="col-md-4" style="margin-top:20px">
+                <table class="table table-sm table-striped">
+                    <tr>
+                        <td colspan="2">
+                            {% if emlak.resim %}
+                        <a href="{{ emlak.get_absolute_url }}"><img src="{{ emlak.resim.url }}" class="img-fluid"/></a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>İlan No:</td>
+                        <td>{{ emlak.ilanno}}</td>
+                    </tr>
+                    <tr>
+                        <td>Emlak Tipi:</td>
+                        <td>Kiralık {{ emlak.tip }}</td>
+                    </tr>
+                    {% if emlak.oda %}
+                    <tr><td>Oda Sayısı:</td>
+                        <td>{{ emlak.oda }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if emlak.kat %}
+                    <tr>
+                        <td>Bulunduğu Kat:</td>
+                        <td>{{ emlak.kat }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Büyüklük:</td>
+                        <td>{{ emlak.buyukluk }} m<sup>2</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Fiyatı:</td>
+                        <td>{{ emlak.fiyat }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                           {{ emlak.il }}  /  {{ emlak.ilce }}  /  {{ emlak.mahalle }} Mahallesi
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                        <a href="{{ emlak.get_absolute_url }}" class="btn btn-primary" style="margin-right:5px">İncele</a>
+                            {% if request.user.is_authenticated %}
+                        <a href="{{ emlak.get_update_url }}" class="btn btn-success" style="margin-right:5px">Güncelle</a>
+                            <a href="{{ emlak.get_delete_url }}" class="btn btn-warning">Sil</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+    {% endfor %}
+             </div>
+            <div class="row row-margin">
+                <ul class="pagination">
+
+                        {% if emlaks.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?sayfa=1">&laquo; ilk</a></li>
+                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.previous_page_number }}">geri</a></li>
+                        {% endif %}
+                        {% if emlaks.has_next %}
+                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.next_page_number }}">ileri</a></li>
+                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.paginator.num_pages }}">son &raquo;</a></li>
+                        {% endif %}
+
+                </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'z$eb&(9t!-7vj05=3f8ch-tq@_t&vaof_+iw)%&(kpe&xfr-ew'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'proje',
     'temizlik',
     'foto',
+    'emlak',
     # 3.parti uygulamalar
     'ckeditor',
     'django_cleanup',

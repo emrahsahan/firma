@@ -18,16 +18,20 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from home.views import home_view
-from insaat.views import hakkimizda_view
-from temizlik.views import temizlik_view
+from insaat.views import hakkimizda_view, iletisim_view
+from temizlik.views import temizlik_view, bina_view
 from django.conf.urls import url, include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', home_view, name='home'),
     url(r'^temizlik-hizmetleri/', temizlik_view, name='temizlik'),
+    url(r'^profesyonel-bina-yonetim-sistemleri/', bina_view, name='bina'),
+    url(r'^iletisim/', iletisim_view, name='iletisim'),
     url(r'^hakkimizda/', hakkimizda_view, name='hakkimizda'),
     url(r'^post/', include('haber.urls')),
+    url(r'^emlak/', include('emlak.urls')),
     url(r'^proje/', include('proje.urls')),
 ]
 

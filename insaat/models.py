@@ -17,8 +17,7 @@ class Insaat(models.Model):
     twitter = models.CharField(max_length=120, verbose_name='Twitter', null=True)
     youtube = models.CharField(max_length=120, verbose_name='Youtube', null=True)
     instagram = models.CharField(max_length=120, verbose_name='Instagram', null=True)
-    googlemapx = models.CharField(max_length=120, verbose_name='Google Map X Koordinatı', null=True)
-    googlemapy = models.CharField(max_length=120, verbose_name='Google Map Y Koordinatı', null=True)
+    googlemap = models.TextField(verbose_name='Google Map', null=True)
 
     class Meta:
         verbose_name_plural = 'Firmalar'

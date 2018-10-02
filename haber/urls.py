@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from .views import *
 
+
 app_name = 'post'
 
 urlpatterns = [
@@ -11,3 +12,4 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/update/$', post_update, name='update'),
     url(r'^(?P<slug>[\w-]+)/delete/$', post_delete, name='delete'),
 ]
+

@@ -3,15 +3,20 @@ from .models import Blog
 from .models import Blogresim
 from .forms import BlogForm
 from django.utils.text import slugify
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 # Create your views here.
 
 def post_index(request):
-    posts = Blog.objects.filter(aktif=True)
+    post_list = Blog.objects.filter(aktif=True)
+    paginator = Paginator(post_list, 4)
+    sayfa = request.GET.get('sayfa')
+    posts = paginator.get_page(sayfa)
     return render(request, 'haber/index.html', {'posts': posts})
 
 def post_detail(request, slug, id):
     post = get_object_or_404(Blog, slug=slug, aktif=True)
+
     return render(request, 'haber/detail.html', {'post': post,})
 
 def post_create(request):
@@ -56,3 +61,4 @@ def post_delete(request, slug):
     post = get_object_or_404(Blog, slug=slug)
     post.delete()
     return redirect('post:index')
+

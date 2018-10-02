@@ -9,7 +9,7 @@ class Blog(models.Model):
     baslik = models.CharField(max_length=120, verbose_name='Yazı Başlığı')
     detay = RichTextField(verbose_name='Detay')
     tarih = models.DateTimeField(auto_now_add=True, verbose_name='Eklenme Tarihi')
-    resim = models.ImageField(verbose_name='Haber Resmi', null=True)
+    resim = models.ImageField(upload_to='haber/%Y/%m/%d', verbose_name='Haber Resmi', null=True)
     aktif = models.BooleanField(default=True, verbose_name='Haber yayınlansın mı?')
     slug = models.SlugField(unique=True, editable=False, max_length=130)
 
@@ -47,7 +47,7 @@ class Blog(models.Model):
 
 class Blogresim(models.Model):
     blog = models.ForeignKey(Blog, related_name='resimler', on_delete=models.CASCADE)
-    resimb = models.ImageField(verbose_name='Resim Seç')
+    resimb = models.ImageField(upload_to='haber/%Y/%m/%d', verbose_name='Resim Seç')
 
     class Meta:
         verbose_name_plural = 'Haber Resimleri'

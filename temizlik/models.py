@@ -7,7 +7,7 @@ class Temizlik(models.Model):
     baslik = models.CharField(max_length=120, verbose_name='Yazı Başlığı')
     detay = RichTextField(verbose_name='Detay')
     tarih = models.DateTimeField(auto_now_add=True, verbose_name='Eklenme Tarihi')
-    resim = models.ImageField(verbose_name='Temizlik Resmi', null=True)
+    resim = models.ImageField(upload_to='temizlik/%Y/%m/%d', verbose_name='Temizlik Resmi', null=True)
 
     class Meta:
         verbose_name_plural = 'Temizlik Hizmetleri'

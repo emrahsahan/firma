@@ -6,7 +6,7 @@ from django.utils.text import slugify
 class Proje(models.Model):
     projeadi = models.CharField(max_length=120, verbose_name='Proje Adı')
     aciklama = RichTextField(verbose_name='Açıklama')
-    resim = models.ImageField(verbose_name='Proje Resmi', null=True)
+    resim = models.ImageField(upload_to='proje/%Y/%m/%d', verbose_name='Proje Resmi', null=True)
     slug = models.SlugField(unique=True, editable=False, max_length=130)
     tarih = models.DateTimeField(auto_now_add=True, verbose_name='Eklenme Tarihi')
 
@@ -44,7 +44,7 @@ class Proje(models.Model):
 
 class Projefoto(models.Model):
     proje = models.ForeignKey(Proje, related_name='projeresimler', on_delete=models.CASCADE)
-    fotograf = models.ImageField(verbose_name='Proje Resmi')
+    fotograf = models.ImageField(upload_to='proje/%Y/%m/%d', verbose_name='Proje Resmi')
 
     class Meta:
         verbose_name_plural = 'Proje Fotoğrafları'

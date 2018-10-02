@@ -1,32 +1,143 @@
 {% extends 'base.html' %}
 
-{% block title %} Anasayfa - {{ block.super }}{% endblock %}
+{% block title %}{{ block.super }}{% endblock %}
 
 {% block body %}
 
-    <div class="container">
+   <div class="container">
+       <div class="row">
+           <div class="col-md-12">
+               <h4 class="text-danger">Son Eklenen Satılık Emlak İlanları</h4>
+           </div>
 
+       </div>
+       <div class="row">
 
-    {% for post in posts %}
-        <div class="row row-margin">
-            <div class="col-md-8 offset-md-2">
-                <div class="card">
-                <h5 class="card-header">{{ post.baslik }}</h5>
-                    <div class="card-body">
-                    <h5 class="card-title">{{ post.tarih|timesince }} önce</h5>
-                        {% if post.resim %}
-                        <img src="{{ post.resim.url }}" class="img-fluid"/>
+    {% for satilik in satilik_list %}
+
+            <div class="col-md-4" style="margin-top:20px">
+                <table class="table table-sm table-striped">
+                    <tr>
+                        <td colspan="2">
+                            {% if satilik.resim %}
+                        <a href="{{ satilik.get_absolute_url }}"><img src="{{ satilik.resim.url }}" class="img-fluid"/></a>
                         {% endif %}
-                    <p class="card-text">{{ post.detay|safe|linebreaks|truncatechars:150 }}</p>
-                        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Haberi oku</a>
-                        {% if request.user.is_authenticated %}<a href="{{ post.get_update_url }}" class="btn btn-success">Güncelle</a>
-                        <a href="{{ post.get_delete_url }}" class="btn btn-danger">Sil</a>{% endif %}
-                    </div>
-                </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>İlan No:</td>
+                        <td>{{ satilik.ilanno}}</td>
+                    </tr>
+                    <tr>
+                        <td>Emlak Tipi:</td>
+                        <td>Satılık {{ satilik.tip }}</td>
+                    </tr>
+                    {% if satilik.oda %}
+                    <tr><td>Oda Sayısı:</td>
+                        <td>{{ satilik.oda }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if satilik.kat %}
+                    <tr>
+                        <td>Bulunduğu Kat:</td>
+                        <td>{{ satilik.kat }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Büyüklük:</td>
+                        <td>{{ satilik.buyukluk }} m<sup>2</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Fiyatı:</td>
+                        <td>{{ satilik.fiyat }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                           {{ satilik.il }}  /  {{ satilik.ilce }}  /  {{ satilik.mahalle }} Mah.
+                     </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                        <a href="{{ satilik.get_absolute_url }}" class="btn btn-primary" style="margin-right:5px">İncele</a>
+                            {% if request.user.is_authenticated %}
+                        <a href="{{ satilik.get_update_url }}" class="btn btn-success" style="margin-right:5px">Güncelle</a>
+                            <a href="{{ satilik.get_delete_url }}" class="btn btn-warning">Sil</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
             </div>
-        </div>
-    {% endfor %}
 
-    </div>
+    {% endfor %}
+             </div>
+
+              <div class="row">
+                    <div class="col-md-12">
+                            <h4 class="text-danger">Son Eklenen Kiralık Emlak İlanları</h4>
+                    </div>
+
+                </div>
+                       <div class="row">
+
+    {% for kiralik in kiralik_list %}
+
+            <div class="col-md-4" style="margin-top:20px">
+                <table class="table table-sm table-striped">
+                    <tr>
+                        <td colspan="2">
+                            {% if kiralik.resim %}
+                        <a href="{{ kiralik.get_absolute_url }}"><img src="{{ kiralik.resim.url }}" class="img-fluid"/></a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>İlan No:</td>
+                        <td>{{ kiralik.ilanno}}</td>
+                    </tr>
+                    <tr>
+                        <td>Emlak Tipi:</td>
+                        <td>Kiralık {{ kiralik.tip }}</td>
+                    </tr>
+                    {% if kiralik.oda %}
+                    <tr><td>Oda Sayısı:</td>
+                        <td>{{ kiralik.oda }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if kiralik.kat %}
+                    <tr>
+                        <td>Bulunduğu Kat:</td>
+                        <td>{{ kiralik.kat }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Büyüklük:</td>
+                        <td>{{ kiralik.buyukluk }} m<sup>2</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Fiyatı:</td>
+                        <td>{{ kiralik.fiyat }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                           {{ kiralik.il }}  /  {{ kiralik.ilce }}  /  {{ kiralik.mahalle }} Mah.
+                     </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                        <a href="{{ kiralik.get_absolute_url }}" class="btn btn-primary" style="margin-right:5px">İncele</a>
+                            {% if request.user.is_authenticated %}
+                        <a href="{{ kiralik.get_update_url }}" class="btn btn-success" style="margin-right:5px">Güncelle</a>
+                            <a href="{{ kiralik.get_delete_url }}" class="btn btn-warning">Sil</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+    {% endfor %}
+             </div>
+
+   </div>
 
 {% endblock %}
+

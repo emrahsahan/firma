@@ -1,51 +1,66 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-  <a class="navbar-brand" href="{% url 'home' %}">Başak İnşaat ve Temizlik</a>
+  <a href="{% url 'home' %}"><i class="fa fa-home fa-2x text-white"></i></a>
+  <a class="navbar-brand" style="margin-left:5px" href="{% url 'home' %}">{{ data.adi }}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'home' %}">Anasayfa <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'hakkimizda' %}">Hakkımızda</a>
+        <a class="nav-link text-white" href="{% url 'hakkimizda' %}">Hakkımızda</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'post:index' %}">Haberler</a>
+        <a class="nav-link text-white" href="{% url 'post:index' %}">Haberler</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'proje:index' %}">Projelerimiz</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Emlak
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Kiralık</a>
-          <a class="dropdown-item" href="#">Satılık</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'proje:index' %}">Projelerimiz</a>
-        </div>
+          <a class="dropdown-item" href="{% url 'emlak:kiralik' %}">Kiralık</a>
+          <a class="dropdown-item" href="{% url 'emlak:satilik' %}">Satılık</a>
       </li>
-
-              <li class="nav-item">
-        <a class="nav-link" href="{% url 'temizlik' %}">Temizlik Hizmetleri</a>
+                    <li class="nav-item dropdown">
+        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hizmetlerimiz
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'temizlik' %}">Temizlik Hizmetleri</a>
+          <a class="dropdown-item" href="{% url 'bina' %}">Profesyonel Bina Yönetim Sistemleri</a>
+      </li>
+            <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'iletisim' %}">İletişim</a>
       </li>
 
         {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Ekle
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'post:create' %}">Haber ekle</a>
           <a class="dropdown-item" href="{% url 'proje:create' %}">Proje ekle</a>
+          <a class="dropdown-item" href="{% url 'emlak:create' %}">Emlak İlanı ekle</a>
+          <a class="dropdown-item" href="/admin/">Admin Sayfası</a>
         </div>
       </li>
       {% endif %}
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Anahtar kelime" aria-label="Search">
-      <button class="btn btn-success my-2 my-sm-0" type="submit">Arama</button>
-    </form>
+      <div class="float-right">
+          <ul class="nav nav-pills">
+            <li class="nav-item" style="margin-left:5px"><a target="_blank" href="{{ data.facebook }}"><i class="fab fa-facebook-square fa-lg text-white"></i></a></li>
+            <li class="nav-item" style="margin-left:5px"><a target="_blank" href="{{ data.twitter }}"><i class="fab fa-twitter-square fa-lg text-white"></i></a></li>
+            <li class="nav-item" style="margin-left:5px"><a target="_blank" href="{{ data.youtube }}"><i class="fab fa-youtube-square fa-lg text-white"></i></a></li>
+            <li class="nav-item" style="margin-left:5px"><a target="_blank" href="{{ data.instagram }}"><i class="fab fa-instagram fa-lg text-white"></i></a></li>
+          </ul>
   </div>
+  </div>
+
 </nav>

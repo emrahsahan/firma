@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title %}{{ block.super }} - İnşaat Projelerimiz {% endblock %}
 
 {% block body %}
 
@@ -9,7 +9,7 @@
     {% for proje in projes %}
 
   <!-- Card -->
-            <div class="col-md-6" style="margin-bottom:20px">
+            <div class="col-md-6" style="margin-bottom:5px">
                  <div class="card">
                 {% if proje.resim %}
                     <img class="card-img-top" src="{{ proje.resim.url }}" alt="Card image cap">

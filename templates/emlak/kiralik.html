@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
+{% block title %}{{ block.super }} -  Kiralık Emlak {% endblock %}
+
 
 {% block body %}
 
     <div class="container">
+
+            <form class="form-inline my-2 my-lg-0" role="search" method="GET" action=".">
+      <input class="form-control mr-sm-2" type="search" name="q" placeholder="emlak ara" value="{{ request.GET.q }}" aria-label="Search">
+      <button class="btn btn-success my-2 my-sm-0" type="submit">Ara</button>
+    </form>
+
             <div class="row row-margin">
     {% for emlak in emlaks %}
 
@@ -66,12 +74,12 @@
                 <ul class="pagination">
 
                         {% if emlaks.has_previous %}
-                            <li class="page-item"><a class="page-link" href="?sayfa=1">&laquo; ilk</a></li>
-                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.previous_page_number }}">geri</a></li>
+                            <li class="page-item"><a class="page-link" href="?sayfa=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; ilk</a></li>
+                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">geri</a></li>
                         {% endif %}
                         {% if emlaks.has_next %}
-                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.next_page_number }}">ileri</a></li>
-                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.paginator.num_pages }}">son &raquo;</a></li>
+                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">ileri</a></li>
+                            <li class="page-item"><a class="page-link" href="?sayfa={{ emlaks.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">son &raquo;</a></li>
                         {% endif %}
 
                 </ul>

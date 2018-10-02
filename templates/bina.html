@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{ block.super }} - Temizlik Hizmetleri {% endblock %}
+{% block title %}{{ block.super }} - Profesyonel Bina Yönetim Sistemleri {% endblock %}
 
 {% block body %}
 
@@ -10,14 +10,14 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h5>Temizlik Hizmetleri</h5>
+                        <h5>Profesyonel Bina Yönetim Sistemleri</h5>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ temizlik.tarih|timesince }} önce</h5>
-                        <p>{% if temizlik.resim %}
-                        <img src="{{ temizlik.resim.url }}" class="img-fluid"/>
+                        <h5 class="card-title">{{ bina.tarih|timesince }} önce</h5>
+                        <p>{% if bina.resim %}
+                        <img src="{{ bina.resim.url }}" class="img-fluid"/>
                         {% endif %}</p>
-                        <p class="card-text">{{ temizlik.detay|safe|linebreaks }}</p>
+                        <p class="card-text">{{ bina.detay|safe|linebreaks }}</p>
                     </div>
                 </div>
             </div>

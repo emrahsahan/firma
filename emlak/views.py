@@ -3,11 +3,22 @@ from .models import Emlak
 from .forms import EmlakForm
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .models import EmlakFoto
+from django.db.models import Q
 
 
 # Create your views here.
 def emlak_index_kiralik(request):
     emlak_list = Emlak.objects.filter(aktif=True, durum='2')
+
+    query = request.GET.get('q')
+
+    if query:
+        emlak_list = emlak_list.filter(Q(mahalle__icontains=query) |
+                                       Q(ilce__icontains=query) |
+                                       Q(il__icontains=query) |
+                                       Q(oda__icontains=query) |
+                                       Q(buyukluk__icontains=query)).distinct()
+
     paginator = Paginator(emlak_list, 6)
     sayfa = request.GET.get('sayfa')
     emlaks = paginator.get_page(sayfa)
@@ -15,6 +26,15 @@ def emlak_index_kiralik(request):
 
 def emlak_index_satilik(request):
     emlak_list = Emlak.objects.filter(aktif=True, durum='1')
+
+    query = request.GET.get('q')
+    if query:
+        emlak_list = emlak_list.filter(Q(mahalle__icontains=query) |
+                                       Q(ilce__icontains=query) |
+                                       Q(il__icontains=query) |
+                                       Q(oda__icontains=query) |
+                                       Q(buyukluk__icontains=query)).distinct()
+
     paginator = Paginator(emlak_list, 6)
     sayfa = request.GET.get('sayfa')
     emlaks = paginator.get_page(sayfa)
@@ -22,6 +42,7 @@ def emlak_index_satilik(request):
 
 def emlak_detail(request, id):
     emlak = get_object_or_404(Emlak, id=id, aktif=True)
+
     return render(request, 'emlak/detail.html', {'emlak': emlak, })
 
 def emlak_create(request):
